@@ -1,6 +1,6 @@
 using OpenMod.API.Ioc;
 
-namespace V.Panel.Models.SignalR;
+namespace Sovereignty.Models.SignalR;
 
 [Service]
 public interface IUnturnedClient

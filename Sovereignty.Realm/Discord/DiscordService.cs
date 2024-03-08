@@ -2,12 +2,12 @@ using System.Reflection;
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using Sovereignty.Realm.Discord.TypeConverters;
+using Sovereignty.Realm.Discord.TypeReaders;
 using Steamworks;
-using V.Panel.Backend.Discord.TypeConverters;
-using V.Panel.Backend.Discord.TypeReaders;
 using IResult = Discord.Interactions.IResult;
 
-namespace V.Panel.Backend.Discord;
+namespace Sovereignty.Realm.Discord;
 
 public class DiscordService : BackgroundService
 {

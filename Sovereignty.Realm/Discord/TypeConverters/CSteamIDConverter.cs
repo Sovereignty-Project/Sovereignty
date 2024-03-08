@@ -2,7 +2,7 @@ using Discord;
 using Discord.Interactions;
 using Steamworks;
 
-namespace V.Panel.Backend.Discord.TypeConverters;
+namespace Sovereignty.Realm.Discord.TypeConverters;
 
 public class CSteamIDConverter : TypeConverter<CSteamID>
 {

@@ -2,7 +2,7 @@ using Discord;
 using Discord.Interactions;
 using Steamworks;
 
-namespace V.Panel.Backend.Discord.TypeReaders;
+namespace Sovereignty.Realm.Discord.TypeReaders;
 
 public class CSteamIDReader : TypeReader<CSteamID>
 {

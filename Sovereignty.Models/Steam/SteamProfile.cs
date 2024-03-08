@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 // using Newtonsoft.Json.Converters;
 using Steamworks;
 
-namespace V.Panel.Models.Steam;
+namespace Sovereignty.Models.Steam;
 
 using System;
 

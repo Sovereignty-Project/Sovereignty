@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OpenMod.API.Ioc;
 using TypedSignalR.Client;
-using V.Panel.Models.SignalR;
+using Sovereignty.Models.SignalR;
 
 namespace V.Panel.Unturned.Clients;
 

@@ -1,4 +1,4 @@
-namespace V.Panel.Models.SignalR;
+namespace Sovereignty.Models.SignalR;
 
 public interface IUnturnedHub
 {

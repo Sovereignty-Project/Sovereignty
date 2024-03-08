@@ -1,14 +1,36 @@
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using Sovereignty.Realm.Steam;
 using Steamworks;
-using V.Panel.Backend.Steam;
 
-namespace V.Panel.Backend.Discord.Commands;
+namespace Sovereignty.Realm.Discord.Commands;
 
 [Group("unturned", "Unturned Commands")]
 public class UnturnedCommands  : InteractionModuleBase<SocketInteractionContext>
 {
+    [SlashCommand("modal", "Simple test modal")]
+    public async Task ModalCommand()
+    {
+        var modal = new ModalBuilder()
+            .WithTitle("Test Modal")
+            .WithCustomId("test_modal")
+            .AddTextInput(new TextInputBuilder()
+                .WithLabel("Test input")
+                .WithPlaceholder("Test placeholder")
+                .WithCustomId("test_input")
+            )
+            .AddComponents([
+                new SelectMenuBuilder()
+                    .AddOption("HI", "HI")
+                    .WithPlaceholder("Test select")
+                    .WithCustomId("test_select")
+                    .Build()
+            ], 0);
+
+        await Context.Interaction.RespondWithModalAsync(modal.Build());
+    }
+    
     [RequireRole("Developer")]
     public class AdminCommands : InteractionModuleBase<SocketInteractionContext>
     {
@@ -134,7 +156,33 @@ public class UnturnedCommands  : InteractionModuleBase<SocketInteractionContext>
 
         private async Task<EmbedBuilder> GetCombatPage(CSteamID steamID)
         {
-            throw new NotImplementedException();
+            var code = """
+                       <svg viewBox="114.48 132.722 277.233 245.51" xmlns="http://www.w3.org/2000/svg" class="heatmap svelte-kj8ea4">
+                           <rect x="115" y="192.787" width="92.5" height="46.466" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="298" y="192.829" width="92.5" height="46.506" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="206.7" y="192.847" width="92.571" height="91.52" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="254.049" y="284" width="45.486" height="94" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="206.7" y="284" width="47.524" height="94" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="225.591" y="132.722" width="55.421" height="55.584" style="fill: rgb(216, 216, 216);"></rect>
+                           <rect x="238.89" y="188.142" width="29.038" height="5.137" style="fill: rgb(216, 216, 216);"></rect>
+                       </svg>
+                       """;
+            
+            var profile = await _steamUtility.GetSteamUserAsync(steamID);
+            
+            _logger.LogInformation($"Profile: {profile.Name} {profile.MemberSince.HasValue}");
+            
+            var author = new EmbedAuthorBuilder()
+                .WithName(profile.Name)
+                .WithIconUrl(profile.Avatar)
+                .WithUrl($"https://steamcommunity.com/profiles/{steamID}/");
+
+            var embed = new EmbedBuilder()
+                .WithAuthor(author)
+                .WithTitle("Player Information")
+                .WithImageUrl($"attachment://{Path.GetFileName("./heatmap.jpg")}");
+            
+            return embed;
         }
         
         private async Task<EmbedBuilder> GetPunishmentsPage(CSteamID steamID)

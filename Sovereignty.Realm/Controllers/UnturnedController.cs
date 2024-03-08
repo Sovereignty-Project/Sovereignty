@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace V.Panel.Backend.Controllers;
+namespace Sovereignty.Realm.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("[controller]")]
 public class UnturnedController : ControllerBase
 {
     private readonly ILogger<UnturnedController> _logger;

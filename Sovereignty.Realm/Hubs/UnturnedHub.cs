@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.SignalR;
-using V.Panel.Models.SignalR;
+using Sovereignty.Models.SignalR;
 
-namespace V.Panel.Backend.Hubs;
+namespace Sovereignty.Realm.Hubs;
 
 public class UnturnedHub : Hub<IUnturnedClient>, IUnturnedHub
 {

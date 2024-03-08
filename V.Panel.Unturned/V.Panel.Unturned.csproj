@@ -35,7 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\V.Panel.Models\V.Panel.Models.csproj" />
+    <ProjectReference Include="..\Sovereignty.Models\Sovereignty.Models.csproj" />
   </ItemGroup>
 
   <Target Name="ChangeAliasesOfNugetRefs" BeforeTargets="FindReferenceAssembliesForReferences;ResolveReferences">

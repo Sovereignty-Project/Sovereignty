@@ -1,6 +1,6 @@
 using Steamworks;
 
-namespace V.Panel.Models.DTO;
+namespace Sovereignty.Models.DTO;
 
 public class InvestigateResponseDTO
 {

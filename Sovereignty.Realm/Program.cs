@@ -1,27 +1,42 @@
 using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
-using Microsoft.Extensions.Caching.Memory;
-using V.Panel.Backend.Discord;
-using V.Panel.Backend.Hubs;
-using V.Panel.Backend.Steam;
+using Microsoft.Extensions.Caching.Distributed;
+// using Microsoft.Extensions.Caching.Memory;
+using Sovereignty.Realm.Configuration.cs;
+using Sovereignty.Realm.Discord;
+using Sovereignty.Realm.Hubs;
+using Sovereignty.Realm.Steam;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configuration
+builder.Configuration.AddEnvironmentVariables(prefix: "VPanel:");
 
 // Add services to the container.
 builder.Services.AddSignalR();
 builder.Services.AddControllers();
-builder.Services.AddResponseCaching();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
+    {
+        EndPoints =
+        {
+            builder.Configuration.GetSection(VPanelConfiguration.SectionName).Get<VPanelConfiguration>()?.REDIS_HOST ?? string.Empty
+        }
+    };
+    options.InstanceName = "Sovereignty.Realm";
+});
+// builder.Services.AddResponseCaching();
 
 // Steam
-builder.Services.AddSingleton<IMemoryCache>(new MemoryCache(new MemoryCacheOptions()));
 builder.Services.AddHttpClient();
 builder.Services.AddTransient<SteamUtility>(provider =>
 {
     var config = provider.GetRequiredService<IConfiguration>();
     var logger = provider.GetRequiredService<ILogger<SteamUtility>>();
     var client = provider.GetRequiredService<HttpClient>();
-    var cache = provider.GetRequiredService<IMemoryCache>();
+    var cache = provider.GetRequiredService<IDistributedCache>();
     return new SteamUtility(config, logger, client, cache);
 });
 
@@ -90,13 +105,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.UseCors();
-app.UseResponseCaching();
+// app.UseCors();
+// app.UseResponseCaching();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}");
+    pattern: "api/{controller}");
 
-app.MapHub<UnturnedHub>("/api/signalr/unturned");
+app.MapHub<UnturnedHub>("/signalr/unturned");
 
 app.Run();

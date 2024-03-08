@@ -1,10 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V.Panel.Backend", "V.Panel.Backend\V.Panel.Backend.csproj", "{7F7C20DB-4E19-40DC-AC45-3F0808A84066}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sovereignty.Realm", "Sovereignty.Realm\Sovereignty.Realm.csproj", "{7F7C20DB-4E19-40DC-AC45-3F0808A84066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V.Panel.Models", "V.Panel.Models\V.Panel.Models.csproj", "{B4AB71BC-3507-4CDE-B5B8-D26FC1F81ABC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sovereignty.Models", "Sovereignty.Models\Sovereignty.Models.csproj", "{B4AB71BC-3507-4CDE-B5B8-D26FC1F81ABC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "V.Panel.Unturned", "V.Panel.Unturned\V.Panel.Unturned.csproj", "{0CF3FA71-CF6D-4952-A0DA-272EEA03E4EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D8AEDF6-8FFA-4CA0-9085-859D21F16EC2}"
+	ProjectSection(SolutionItems) = preProject
+		sovereignty-service.yaml = sovereignty-service.yaml
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
